@@ -1,12 +1,35 @@
-// "Move: up" - move up one square (unless facing down)
-// "Move: down" - move down one square (unless facing up)
-// "Move: left" - move left one square (unless facing right)
-// "Move: right" - move left one square (unless facing left)
 
-// setup interface to handle user input from stdin
+const { connect } = require("./client");
 
 
-const setupInput = function () {
+const handleUserInput = function (key) {
+
+  if (key === '\u0003') {
+    process.exit();
+  };
+
+  if (key === 'w') {
+    connection.write('Move: up');
+  };
+
+  if (key === 's') {
+    connection.write('Move: down');
+  };
+
+  if (key === 'a') {
+    connection.write('Move: left');
+  };
+
+  if (key === 'd') {
+    connection.write('Move: right');
+  };
+
+};
+
+let connection;
+
+const setupInput = function (conn) {
+  connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding("utf8");
@@ -15,13 +38,6 @@ const setupInput = function () {
   return stdin;
 };
 
-const handleUserInput = function () {
-  stdin.on('data', (key) => {
-    if (key === '\u0003') {
-      process.exit();
-    }
-  });
-};
 
 module.exports = {
   setupInput
