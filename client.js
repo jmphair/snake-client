@@ -16,6 +16,10 @@ const connect = function () {
     conn.write('Name: JP'); // working! the servers says: "JP: Hey"
   });
 
+  conn.on('data', (data) => {
+    console.log('Server says: ', data);
+  });
+
   return conn;
 };
 
