@@ -14,10 +14,14 @@ const connect = function () {
     console.log('Successfully connected to game server!');
     // from the article I think it's this one... ran with console.log a few too many times lol
     conn.write('Name: JP'); // working! the servers says: "JP: Hey"
-    conn.write('Move: up'); // it works to move it up one level!
   });
 
   return conn;
 };
 
 module.exports = connect;   
+
+// "Move: up" - move up one square (unless facing down)
+// "Move: down" - move down one square (unless facing up)
+// "Move: left" - move left one square (unless facing right)
+// "Move: right" - move left one square (unless facing left)
